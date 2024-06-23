@@ -1,0 +1,267 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url(vishnu-mohanan-pfR18JNEMv8-unsplash.jpg);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 1px solid rgb(255, 255, 255, 0.5);
+    margin-bottom: 1rem;
+}
+
+header,
+form {
+    min-height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+form input,
+form button {
+    padding: 0.5rem;
+    padding-top: 0.658rem;
+    padding-left: .97rem;
+    font-size: 1.3rem;
+    border: none;
+    background: white;
+    border-radius: 2rem;
+}
+
+.todo-input {
+    font-size: 1.3rem;
+}
+
+form button {
+    color: rgb(255, 200, 0);
+    background: white;
+    cursor: pointer;
+    transition: all 0.3 ease;
+    margin-left: .5rem;
+}
+
+form button:hover {
+    color: white;
+    background: rgb(255, 200, 0);
+}
+
+.fa-plus-circle {
+    margin-top: 0.3rem;
+    margin-left: -8px;
+}
+
+.todo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 600px
+}
+
+.todo-list {
+    min-width: 30%;
+    list-style: none;
+}
+
+.todoal {
+    position: relative;
+    margin: 0.5rem;
+    padding-left: 0.5rem;
+    background: white;
+    color: black;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 2rem;
+}
+
+.todo-button i{
+    letter-spacing: 3px;
+    font-size: 1.6rem;
+}
+
+.todo:hover {
+    background-color: black;
+    color: white;
+}
+
+.todo-li {
+    flex: 1;
+}
+
+.trash-btn,
+.complete-btn {
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: .7rem;
+    transition: all .4s;
+}
+
+.complete-btn {
+    background: rgb(255, 200, 18);
+}
+
+.trash-btn {
+    border-top-right-radius: 1.75rem;
+    border-bottom-right-radius: 1.75rem;
+    background: rgb(81, 192, 243)
+}
+
+.complete-btn:hover,
+.trash-btn:hover {
+    filter: brightness(0.87);   
+}
+
+.todo-item {
+    /* position: relative; */
+    padding: 0rem 0.5rem;
+}
+
+.fa-trash,
+.fa-check-circle {
+    pointer-events: none;
+}
+
+.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.slide {
+    transform: translateX(10rem);
+    opacity: 0.5;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    border: none;
+}
+
+.select {
+    margin: 1rem;
+    position:  relative;
+    overflow: hidden;
+    border-radius: 50px;
+}
+
+select {
+    color: rgb(255, 200, 0);
+    width: 10rem;
+    height: 2.7rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    /* padding: 1rem; */
+    padding-left: 1rem;
+}
+
+.select::after {
+    content: "\25BC";
+    position: absolute;
+    background: rgb(255, 200, 0);
+    top: 0;
+    right: 0;
+    padding:  1rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.select:hover::after {
+    background: gray;
+    color: rgb(255, 200, 0);
+}
+
+#myLabel, .timeInput {
+    font-size: 1.5rem;
+    padding: .5rem 1rem;
+    border: 1px solid white;
+    border-radius: 25px;
+}
+
+.encTime, span {
+    position: absolute;
+    color: white;
+    font-size: 0.9rem;
+    left: -140px;
+    top: 1px;   
+    border: 1px rgb(255, 255, 255) solid;
+    border-radius: 20px 0px 0px 20px;
+    padding: 10px;
+    padding-right: 50px;
+    z-index: -1;
+}
+
+.todo-item span:hover{
+    font-weight: 600;
+}
+
+.setTm {
+    position: absolute;
+    color: white;
+    font-size: 0.9rem;
+    right: -80px;
+    top: 1px;
+    border: 1px rgb(255, 255, 255) solid;
+    border-radius: 20px 20px 20px 20px;
+    padding: 10px 30px;
+    z-index: -1;
+}
+
+.setAlarm {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 780px) {
+    form {
+        flex-direction: column;
+    }
+    .todo-input {
+        margin-block: 20px;
+    }
+
+    .encTime, span {
+        font-size: 0.8rem;
+        left: 20px;
+        top: -30px;
+        padding: 10px;  
+        padding-right: 50px;
+        border-radius: 20px 20px 0px 0px;
+        width: 180px;
+    }
+
+    .todoal {
+        margin: 2.5rem;
+        margin-top: 2.8rem;
+        /* padding-left: 0.5rem; */
+    }
+
+    .todo-item {
+        width: auto;
+    }
+}
+
+
