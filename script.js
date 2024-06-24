@@ -10,16 +10,20 @@ filterOption.addEventListener("change", filterTodo);
 
 let dateIn = new Date();
 let dateStr = dateIn.toDateString(); 
+let setTm = document.querySelector("#aSet");
 
 
 function addTodo(event) {
-    let setTm = document.querySelector("#aSet");
+    let alarmTime = setTm.value;
     let todoInputDate = `${todoInput.value} - ${dateStr}`;
-    let todoInputDat = `${todoInput.value}<div class="setTm">${setTm.value}</div><span class="encTime">${dateStr}</span>`
+    let todoInputDat = `${todoInput.value}<div class="setTm">${alarmTime}</div><span class="encTime">${dateStr}</span>`
     event.preventDefault();
-    const timeInput = document.createElement("span")
+    const timeInput = document.createElement("span");
     timeInput.classList.add("encTime");
     timeInput.innerText = dateStr;
+    const alrmInput = document.createElement("div");
+    alrmInput.classList.add("setTm");
+    alrmInput.innerText = alarmTime;
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todoal");
     const newTodo = document.createElement("li");
@@ -27,6 +31,7 @@ function addTodo(event) {
     newTodo.classList.add("todo-item");
     todoDiv.appendChild(newTodo);
     newTodo.appendChild(timeInput);
+    newTodo.appendChild(alrmInput);
 
     //ADDING TO LOCAL STORAGE 
     // saveLocalTodos(todoInput.value,);
