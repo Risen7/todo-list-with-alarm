@@ -1,0 +1,17 @@
+To do list with alarm features
+- Add notes -done
+- add time encoded -done
+- add alarm -not yet
+- add repeat notes -not yet
+- responsive -ongoing
+- add sort for completed and not completed -done
+- save to local storage -done but with bugs
+- button completed (✔) and delete (x) -done
+- set alarm -done
+- bugs
+- 
+
+
+
+project started - may 25, 2024
+target completion - july 15, 2024
