@@ -1,213 +1,269 @@
-const todoInput = document.querySelector(".todo-input");
-const todoButton = document.querySelector(".todo-button");
-const todoList = document.querySelector(".todo-list");
-const filterOption = document.querySelector(".filter-todo");
-
-document.addEventListener("DOMContentLoaded", getLocalTodos);
-todoButton.addEventListener("click", addTodo);
-todoList.addEventListener("click", deleteCheck);
-filterOption.addEventListener("change", filterTodo);
-
-let dateIn = new Date();
-let dateStr = dateIn.toDateString(); 
-let setTm = document.querySelector("#aSet");
-
-
-function addTodo(event) {
-    let alarmTime = setTm.value;
-    let todoInputDate = `${todoInput.value} - ${dateStr}`;
-    let todoInputDat = `${todoInput.value}<div class="setTm">${alarmTime}</div><span class="encTime">${dateStr}</span>`
-    event.preventDefault();
-    const timeInput = document.createElement("span");
-    timeInput.classList.add("encTime");
-    timeInput.innerText = dateStr;
-    const alrmInput = document.createElement("div");
-    alrmInput.classList.add("setTm");
-    alrmInput.innerText = alarmTime;
-    const todoDiv = document.createElement("div");
-    todoDiv.classList.add("todoal");
-    const newTodo = document.createElement("li");
-    newTodo.innerText = todoInput.value; 
-    newTodo.classList.add("todo-item");
-    todoDiv.appendChild(newTodo);
-    newTodo.appendChild(timeInput);
-    newTodo.appendChild(alrmInput);
-
-    //ADDING TO LOCAL STORAGE 
-    // saveLocalTodos(todoInput.value,);
-    saveLocalTodos(todoInputDat)
-
-    
-    const btnDiv = document.createElement("div");
-    btnDiv.classList.add("btn-div");
-    todoDiv.appendChild(btnDiv);
-    const completedButton = document.createElement("button");
-    completedButton.innerHTML = '<i class="fas fa-check"></li>';
-    completedButton.classList.add("complete-btn");
-    btnDiv.appendChild(completedButton);
-
-    const trashButton = document.createElement("button");
-    trashButton.innerHTML = '<i class="fas fa-x"></li>';
-    trashButton.classList.add("trash-btn");
-    btnDiv.appendChild(trashButton);
-    
-    todoList.appendChild(todoDiv);
-    todoInput.value = "";
-    console.log(todoInputDate);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-function deleteCheck(e) {
-    const item = e.target;
-    // console.log(item);
-
-    if(item.classList[0] === "trash-btn") {
-        const todoal = item.parentElement.parentElement;
-        todoal.classList.add("slide");
-
-        removeLocalTodos(todoal);
-        todoal.addEventListener("transitionend", function() {
-            todoal.remove();
-        });
-    }
-
-    if(item.classList[0] === "complete-btn") {
-        const todoal = item.parentElement.parentElement;
-        todoal.classList.toggle("completed");
-    }
-
-    console.log(item.parentElement);    
+body {
+    background: url(vishnu-mohanan-pfR18JNEMv8-unsplash.jpg);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
 }
 
-function filterTodo(e) {
-    const todosal = todoList.childNodes;
-    todosal.forEach(function(todoal) {
-        switch(e.target.value) {
-            case "all": 
-                todoal.style.display = "flex";
-                break;
-            case "completed": 
-                if(todoal.classList.contains("completed")) {
-                    todoal.style.display = "flex";
-                } else {
-                    todoal.style.display = "none";
-                }
-                break;
-            case "incomplete":
-                if(!todoal.classList.contains("completed")) {
-                    todoal.style.display = "flex";
-                } else {
-                    todoal.style.display = "none";
-                }
-                break;
-        }
-    });
+header {
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
 }
 
-function saveLocalTodos(todoal) {
-    let todosal;
-    if(localStorage.getItem("todosal") === null) {
-        todosal = [];
-    } else {
-        todosal = JSON.parse(localStorage.getItem("todosal"));
-    }
-    todosal.push(todoal);
-    localStorage.setItem("todosal", JSON.stringify(todosal));
+h1 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 1px solid rgb(255, 255, 255, 0.5);
+    margin-bottom: 1rem;
 }
 
-function getLocalTodos() {
-    let todosal;
-    if(localStorage.getItem("todosal") === null) {
-        todosal = [];
-    } else {
-        todosal = JSON.parse(localStorage.getItem("todosal"));
-    }
-    todosal.forEach(function(todoal) {
-        // const todoDiv = document.createElement("div");
-        // todoDiv.classList.add("todo");
-        // const newTodo = document.createElement("li");
-        // newTodo.innerText = todo;
-        // newTodo.classList.add("todo-item");
-        // todoDiv.appendChild(newTodo);
-
-        let todoInputDate = `${todoInput.value} - ${dateStr}`;
-        // event.preventDefault();
-        const timeInput = document.createElement("span")
-        // timeInput.classList.add("encTime");
-        // timeInput.innerText = dateStr;
-        const todoDiv = document.createElement("div");
-        todoDiv.classList.add("todoal");
-        const newTodo = document.createElement("li");
-        newTodo.innerHTML = todoal; 
-        newTodo.classList.add("todo-item");
-        todoDiv.appendChild(newTodo);
-        // newTodo.appendChild(timeInput);
-
-        const btnDiv = document.createElement("div");
-        btnDiv.classList.add("btn-div");
-        todoDiv.appendChild(btnDiv);
-        const completedButton = document.createElement("button");
-        completedButton.innerHTML = '<i class="fas fa-check"></li>';
-        completedButton.classList.add("complete-btn");
-        btnDiv.appendChild(completedButton);
-
-        const trashButton = document.createElement("button");
-        trashButton.innerHTML = '<i class="fas fa-x"></li >';
-        trashButton.classList.add("trash-btn");
-        btnDiv.appendChild(trashButton);
-
-        todoList.appendChild(todoDiv);
-
-        console.log(localStorage.getItem("todosal"))
-    });
+header,
+form {
+    min-height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-function removeLocalTodos(todoal) {
-    let todosal;
-    if(localStorage.getItem("todosal") === null) {
-        todosal = [];
-    } else {
-        todosal = JSON.parse(localStorage.getItem("todosal"));
+form input,
+form button {
+    padding: 0.5rem;
+    padding-top: 0.658rem;
+    padding-left: .97rem;
+    font-size: 1.3rem;
+    border: none;
+    background: white;
+    border-radius: 2rem;
+}
+
+.todo-input {
+    font-size: 1.3rem;
+}
+
+form button {
+    color: rgb(255, 200, 0);
+    background: white;
+    cursor: pointer;
+    transition: all 0.3 ease;
+    margin-left: .5rem;
+}
+
+form button:hover {
+    color: white;
+    background: rgb(255, 200, 0);
+}
+
+.fa-plus-circle {
+    margin-top: 0.3rem;
+    margin-left: -8px;
+}
+
+.todo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 600px
+}
+
+.todo-list {
+    min-width: 30%;
+    list-style: none;
+}
+
+.todoal {
+    position: relative;
+    margin: 0.5rem;
+    padding-left: 0.5rem;
+    background: white;
+    color: black;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 2rem;
+}
+
+.todo-button i{
+    letter-spacing: 3px;
+    font-size: 1.6rem;
+}
+
+.todo:hover {
+    background-color: black;
+    color: white;
+}
+
+.todo-li {
+    flex: 1;
+}
+
+.trash-btn,
+.complete-btn {
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: .7rem;
+    transition: all .4s;
+}
+
+.complete-btn {
+    background: rgb(255, 200, 18);
+}
+
+.trash-btn {
+    border-top-right-radius: 1.75rem;
+    border-bottom-right-radius: 1.75rem;
+    background: rgb(81, 192, 243)
+}
+
+.complete-btn:hover,
+.trash-btn:hover {
+    filter: brightness(0.87);   
+}
+
+.todo-item {
+    /* position: relative; */
+    padding: 0rem 0.5rem;
+}
+
+.fa-check,
+.fa-x {
+    pointer-events: none;
+}
+
+.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.slide {
+    transform: translateX(10rem);
+    opacity: 0.5;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    border: none;
+}
+
+.select {
+    margin: 1rem;
+    position:  relative;
+    overflow: hidden;
+    border-radius: 50px;
+}
+
+select {
+    color: rgb(255, 200, 0);
+    width: 10rem;
+    height: 2.7rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    /* padding: 1rem; */
+    padding-left: 1rem;
+}
+
+.select::after {
+    content: "\25BC";
+    position: absolute;
+    background: rgb(255, 200, 0);
+    top: 0;
+    right: 0;
+    padding:  1rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.select:hover::after {
+    background: gray;
+    color: rgb(255, 200, 0);
+}
+
+#myLabel, .timeInput {
+    font-size: 1.5rem;
+    padding: .5rem 1rem;
+    border: 1px solid white;
+    border-radius: 25px;
+}
+
+.encTime, span {
+    position: absolute;
+    color: white;
+    font-size: 0.9rem;
+    left: -140px;
+    top: 1px;   
+    border: 1px rgb(255, 255, 255) solid;
+    border-radius: 20px 0px 0px 20px;
+    padding: 10px;
+    padding-right: 50px;
+    z-index: -1;
+}
+
+.todo-item span:hover{
+    font-weight: 600;
+}
+
+.setTm {
+    position: absolute;
+    background: rgb(81, 192, 243);
+    width: 140px;
+    color: white;
+    font-size: 1.2rem;
+    right: -150px;
+    top: 1px;
+    border: 1px rgb(255, 255, 255) solid;
+    border-radius: 20px 20px 20px 20px;
+    padding: 5px 30px;
+    z-index: -1;
+}
+
+.setAlarm {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 780px) {
+    form {
+        flex-direction: column;
+    }
+    .todo-input {
+        margin-block: 20px;
     }
 
-    const todoIndex = todoal.children[0].innerText;
-    todosal.splice(todosal.indexOf(todoIndex), 1);
-    localStorage.setItem("todosal", JSON.stringify(todosal));
+    .encTime, span {
+        font-size: 0.8rem;
+        left: 20px;
+        top: -30px;
+        padding: 10px;  
+        padding-right: 50px;
+        border-radius: 20px 20px 0px 0px;
+        width: 180px;
+    }
+
+    .todoal {
+        margin: 2.5rem;
+        margin-top: 2.8rem;
+        /* padding-left: 0.5rem; */
+    }
+
+    .todo-item {
+        width: auto;
+    }
 }
 
 
-// TIME CLOCK --------------------------------------------------------------------------->
-
-const myLabel = document.getElementById("myLabel");
-
-
-update();
-setInterval(update, 1000);
-
-function update(){
-
-    let date = new Date();
-    myLabel.innerHTML = `${date.toDateString()} - ${formatTime(date)}`;
-
-    function formatTime(){
-        let hours = date.getHours();
-        let mins = date.getMinutes();
-        let secs = date.getSeconds();
-
-        let amOrPm = hours >= 12 ? "PM" : "AM";  //to get AM or PM on standards hours
-
-        hours = (hours % 12) || 12;  //to make military time 24hour to 12hours standard
-        
-        hours = formatZeroes(hours);
-        mins = formatZeroes(mins);
-        secs = formatZeroes(secs);
-
-        return`${hours}:${mins}:${secs} ${amOrPm}`
-    }
-
-    function formatZeroes(time){
-        time = time.toString();
-        return time.length < 2 ? "0" + time : time;
-    }
-
-
-}
