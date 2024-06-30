@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", getLocalTodos);
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteCheck);
 filterOption.addEventListener("change", filterTodo);
-testBtn.addEventListener("click", getLocalTodos);
+// testBtn.addEventListener("click", getLocalTodos);
 
 let dateIn = new Date();
 let dateStr = dateIn.toDateString(); 
@@ -191,9 +191,7 @@ function removeLocalTodos(todoal) {
         todosal = JSON.parse(localStorage.getItem("todosal"));
     }
 
-    const todoIndex = todoal.children[0].innerText;
-    // console.log(todoIndex);
-    console.log(todosal);
+    const todoIndex = todoal.children[0].innerHTML;
     todosal.splice(todosal.indexOf(todoIndex), 1);
     localStorage.setItem("todosal", JSON.stringify(todosal));
 }
@@ -232,6 +230,5 @@ function update(){
         time = time.toString();
         return time.length < 2 ? "0" + time : time;
     }
-
 
 }
