@@ -3,16 +3,22 @@ const todoButton = document.querySelector(".todo-button");
 const todoList = document.querySelector(".todo-list");
 const filterOption = document.querySelector(".filter-todo");
 const testBtn = document.querySelector(".testBtn");
+const ring = new Audio('alarm-ring.wav');
 
 document.addEventListener("DOMContentLoaded", getLocalTodos);
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteCheck);
 filterOption.addEventListener("change", filterTodo);
+ring.loop = true;
 // testBtn.addEventListener("click", getLocalTodos);
 
 let dateIn = new Date();
 let dateStr = dateIn.toDateString(); 
 let setTm = document.querySelector("#aSet");
+let alarmListArr = [];
+let alarmCount = 0;
+let alarmTM;
+
 
 function addTodo(event) {
     //12 hour format input time--------------------------------------->
@@ -35,6 +41,18 @@ function addTodo(event) {
     }
       alert("Alarm Set To " + hours + ':' + minutes + ' ' + meridian);
     //-------------------------------------------------------------->
+
+    // ADD ALARM---------------------------------------------------->
+    alarmCount++;
+    
+    alarmTM = `${hours}:${minutes} ${meridian}`;
+    alarmListArr.push(alarmTM);
+    console.log(alarmTM);
+    console.log(alarmListArr);
+    console.log(alarmCount);
+
+    //-------------------------------------------------------------->
+
     // let alarmTime = `${setTm.value}`; - previous code
     let alarmTime = `${hours}:${minutes} ${meridian}`
     let todoInputDate = `${todoInput.value} - ${dateStr}`;
@@ -196,6 +214,12 @@ function removeLocalTodos(todoal) {
     localStorage.setItem("todosal", JSON.stringify(todosal));
 }
 
+// STOP ALARM
+
+function stopAlarm(){
+    ring.pause();
+    document.querySelector("#stopAlarm").style.visibility= "hidden";
+}
 
 // TIME CLOCK --------------------------------------------------------------------------->
 
@@ -223,12 +247,27 @@ function update(){
         mins = formatZeroes(mins);
         secs = formatZeroes(secs);
 
+            //Alarm Trigger --------------------------------------------------->
+        for(let i=0; i<alarmListArr.length; i++){
+            if(alarmListArr[i] == `${hours}:${mins} ${amOrPm}`){
+                ring.load();
+                ring.play();
+                console.log(`alarm ringing! + ${i}`)
+                document.querySelector("#stopAlarm").style.visibility= "visible";
+            // alert("ALARM IS RINGING")
+            }
+        }
+
+    //----------------------------------------------------------------->
+
         return`${hours}:${mins}:${secs} ${amOrPm}`
+        
     }
 
     function formatZeroes(time){
         time = time.toString();
         return time.length < 2 ? "0" + time : time;
     }
+
 
 }
