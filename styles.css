@@ -45,6 +45,10 @@ form button {
     border-radius: 2rem;
 }
 
+#aSet {
+    padding: 0.44rem;
+}
+
 .todo-input {
     font-size: 1.3rem;
 }
@@ -111,9 +115,9 @@ form button:hover {
 .complete-btn {
     color: white;
     border: none;
-    padding: 1rem;
+    padding: 0.9rem;
     cursor: pointer;
-    font-size: .7rem;
+    font-size: 0.9rem;
     transition: all .4s;
 }
 
@@ -227,14 +231,25 @@ select {
     top: 1px;
     border: 1px rgb(255, 255, 255) solid;
     border-radius: 20px 20px 20px 20px;
-    padding: 5px 30px;
+    padding: 5.5px 30px;
     z-index: -1;
 }
 
 .setAlarm {
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+}
+
+.testBtn {
+    visibility: hidden;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-inline: 10px;
 }
 
 @media (max-width: 780px) {
@@ -265,4 +280,3 @@ select {
         width: auto;
     }
 }
-
