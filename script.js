@@ -39,13 +39,18 @@ function addTodo(event) {
     } else {
         meridian = 'PM';
     }
-      alert("Alarm Set To " + hours + ':' + minutes + ' ' + meridian);
+
+    let hm = (hours<10 ? "0"+hours : hours)
+    // let mm = (minutes<10 ? "0"+minutes : minutes);
+    
+
+      alert("Alarm Set To " + hm + ':' + minutes + ' ' + meridian);
     //-------------------------------------------------------------->
 
     // ADD ALARM---------------------------------------------------->
     alarmCount++;
     
-    alarmTM = `${hours}:${minutes} ${meridian}`;
+    alarmTM = `${hm}:${minutes}:00 ${meridian}`;
     alarmListArr.push(alarmTM);
     console.log(alarmTM);
     console.log(alarmListArr);
@@ -218,7 +223,7 @@ function removeLocalTodos(todoal) {
 
 function stopAlarm(){
     ring.pause();
-    document.querySelector("#stopAlarm").style.visibility= "hidden";
+    document.querySelector(".testBtn").style.visibility= "hidden";
 }
 
 // TIME CLOCK --------------------------------------------------------------------------->
@@ -249,11 +254,11 @@ function update(){
 
             //Alarm Trigger --------------------------------------------------->
         for(let i=0; i<alarmListArr.length; i++){
-            if(alarmListArr[i] == `${hours}:${mins} ${amOrPm}`){
+            if(alarmListArr[i] == `${hours}:${mins}:${secs} ${amOrPm}`){
                 ring.load();
                 ring.play();
                 console.log(`alarm ringing! + ${i}`)
-                document.querySelector("#stopAlarm").style.visibility= "visible";
+                document.querySelector(".testBtn").style.visibility= "visible";
             // alert("ALARM IS RINGING")
             }
         }
