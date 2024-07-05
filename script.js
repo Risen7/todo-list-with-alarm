@@ -4,6 +4,8 @@ const todoList = document.querySelector(".todo-list");
 const filterOption = document.querySelector(".filter-todo");
 const testBtn = document.querySelector(".testBtn");
 const ring = new Audio('alarm-ring.wav');
+let setAlarm = document.getElementById("setAlarm");
+const checkBx = document.getElementById("myCheck");
 
 document.addEventListener("DOMContentLoaded", getLocalTodos);
 todoButton.addEventListener("click", addTodo);
@@ -61,14 +63,16 @@ function addTodo(event) {
     // let alarmTime = `${setTm.value}`; - previous code
     let alarmTime = `${hours}:${minutes} ${meridian}`
     let todoInputDate = `${todoInput.value} - ${dateStr}`;
+
+    //Don't Save in Local Storage Alarm TIME input if no alarm or with alarm
+
     let todoInputDat = `${todoInput.value}<div class="setTm">${alarmTime}</div><span class="encTime">${dateStr}</span>`
+    let todoInputDatNot = `${todoInput.value}<span class="encTime">${dateStr}</span>`
     event.preventDefault();
     const timeInput = document.createElement("span");
     timeInput.classList.add("encTime");
     timeInput.innerText = dateStr;
     const alrmInput = document.createElement("div");
-    alrmInput.classList.add("setTm");
-    alrmInput.innerText = alarmTime;
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todoal");
     const newTodo = document.createElement("li");
@@ -76,11 +80,21 @@ function addTodo(event) {
     newTodo.classList.add("todo-item");
     todoDiv.appendChild(newTodo);
     newTodo.appendChild(timeInput);
-    newTodo.appendChild(alrmInput);
+
+    //Don't Display Alarm TIME input if no alarm or with alarm
+    if(checkBx.checked == false) {
+        alrmInput.classList.add("setTm");
+        alrmInput.innerText = alarmTime;
+        newTodo.appendChild(alrmInput);
+        saveLocalTodos(todoInputDat)
+    }
+    else {
+        saveLocalTodos(todoInputDatNot)
+    }
 
     //ADDING TO LOCAL STORAGE 
     // saveLocalTodos(todoInput.value,);
-    saveLocalTodos(todoInputDat)
+    // saveLocalTodos(todoInputDat)
 
     
     const btnDiv = document.createElement("div");
@@ -274,5 +288,17 @@ function update(){
         return time.length < 2 ? "0" + time : time;
     }
 
-
 }
+
+
+checkBx.onchange = function() {
+    if(checkBx.checked){
+        document.getElementById("setAlarm").style.visibility = "hidden";
+    }
+    else {
+        document.getElementById("setAlarm").style.visibility = "visible";    
+    }
+    
+}
+    
+  
