@@ -298,6 +298,13 @@ checkBx.onchange = function() {
     else {
         document.getElementById("setAlarm").style.visibility = "visible";    
     }
+
+    // if(checkBx.checked){
+    //     document.getElementById("setAlarm").style.display = "none";
+    // }
+    // else {
+    //     document.getElementById("setAlarm").style.display = "flex";    
+    // }
     
 }
     
