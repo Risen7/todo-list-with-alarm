@@ -19,22 +19,33 @@
         <label id="myLabel"></label>
     </header>
     <form type="">
-        <input type="text" class="todo-input">
-        <button class="todo-button" type="submit">
-            <i class="fas fa-plus-circle fa-lg">Add</i>
-        </button>
-        <div class="select">
-            <select name="todosal" class="filter-todo">
-                <option value="all">All</option>
-                <option value="completed">Completed</option>
-                <option value="incomplete">Incomplete</option>
-            </select>
+        <div class="cont">
+            <input type="text" class="todo-input" placeholder="Type here">
+            <button class="todo-button" type="submit">
+                <i class="fas fa-plus-circle fa-lg">Add</i>
+            </button>
         </div>
-        <div class="setAlarm">
-            <label>Set Alarm</label>
-            <input type="time" id="aSet" required>
+
+        <div class="cont">
+            <div class="select">
+                <select name="todosal" class="filter-todo">
+                    <option value="all">All</option>
+                    <option value="completed">Completed</option>
+                    <option value="incomplete">Incomplete</option>
+                </select>
+            </div>
+            <div class="checkBx" id="checkBx">
+                <input type="checkbox" id="myCheck">
+                <label for="checkbox" id="checkLabel">&nbsp;No Alarm</label>
+            </div>
+            <div class="setAlarm" id="setAlarm">
+                <label>Set Alarm</label>
+                <input type="time" id="aSet" required>
+            </div>
         </div>
-        <button id="stopAlarm" class="testBtn" onclick="stopAlarm()">Stop Alarm</button>
+        <div class="cont">
+            <button id="stopAlarm" class="testBtn" onclick="stopAlarm()">Stop Alarm</button>
+        </div>
     </form>
 
 
