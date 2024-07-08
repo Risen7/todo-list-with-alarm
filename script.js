@@ -131,7 +131,17 @@ function deleteCheck(e) {
 
     if(item.classList[0] === "complete-btn") {
         const todoal = item.parentElement.parentElement;
+        let checks = document.querySelector(".todoal");
         todoal.classList.toggle("completed");
+
+        if(checks.dataset.check == null) {
+            todoal.setAttribute("data-check", true);
+            console.log(checks.dataset.check)
+        }
+        else if(checks.dataset.check == "true") {
+            todoal.removeAttribute("data-check");
+            console.log("removed")
+        }   
     }
 
     // console.log(item.parentElement);    
