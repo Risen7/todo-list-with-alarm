@@ -187,7 +187,7 @@ select {
     content: "\25BC";
     position: absolute;
     background: rgb(255, 200, 0);
-    top: 0;
+    top: -5px;
     right: 0;
     padding:  1rem;
     pointer-events: none;
@@ -206,7 +206,7 @@ select {
     border-radius: 25px;
 }
 
-.encTime, span {
+.encTime {
     position: absolute;
     color: white;
     font-size: 0.9rem;
@@ -256,6 +256,13 @@ select {
     justify-content: center;
     align-items: center;
     padding-inline: 10px;
+    animation: alarm .5s infinite;
+}
+
+@keyframes alarm {
+    0% { background: rgb(255, 200, 0); color: white;}
+    100% { background: white; color: rgb(255, 200, 0);}
+    
 }
 
 .cont {
@@ -288,11 +295,11 @@ select {
     }
 
     .todo-container {
-        justify-content: flex-start;
-        margin-left: 10%;
+        justify-content: center;
+        margin-left: 0%;
     }
 
-    .encTime, span {
+    .encTime{
         display: flex;
         justify-content: center;
         font-size: 0.8rem;
@@ -319,5 +326,12 @@ select {
 
     .todo-item {
         width: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .todo-container {
+        justify-content: flex-start;
+        margin-left: 10%;
     }
 }
