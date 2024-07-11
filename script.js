@@ -20,7 +20,7 @@ let setTm = document.querySelector("#aSet");
 let alarmListArr = [];
 let alarmCount = 0;
 let alarmTM;
-
+let checkSave = [];
 
 function addTodo(event) {
     //12 hour format input time--------------------------------------->
@@ -135,15 +135,29 @@ function deleteCheck(e) {
 
         if(todoal.dataset.check == null) {
             todoal.setAttribute("data-check", true);
-            console.log(checks.dataset.check)
         }
         else if(todoal.dataset.check == "true") {
             todoal.removeAttribute("data-check");
-            console.log("removed")
         }   
     }
 
-    // console.log(item.parentElement);    
+    //-------------------------testing getting all todo from local storage-------------------------------------------->
+
+    let todosal;
+    if(localStorage.getItem("todosal") === null) {
+        todosal = [];
+    } else {
+        todosal = JSON.parse(localStorage.getItem("todosal"));
+    }
+    todosal.forEach(function(todoal) {
+
+        
+
+        console.log(todoal)
+    });
+
+
+    //---------------------------------------------------------------------------------------------------------------->    
 }
 
 function filterTodo(e) {
@@ -190,25 +204,17 @@ function getLocalTodos() {
         todosal = JSON.parse(localStorage.getItem("todosal"));
     }
     todosal.forEach(function(todoal) {
-        // const todoDiv = document.createElement("div");
-        // todoDiv.classList.add("todo");
-        // const newTodo = document.createElement("li");
-        // newTodo.innerText = todo;
-        // newTodo.classList.add("todo-item");
-        // todoDiv.appendChild(newTodo);
 
         let todoInputDate = `${todoInput.value} - ${dateStr}`;
         // event.preventDefault();
         const timeInput = document.createElement("span")
-        // timeInput.classList.add("encTime");
-        // timeInput.innerText = dateStr;
         const todoDiv = document.createElement("div");
         todoDiv.classList.add("todoal");
+        // todoDiv.classList.add("completed");   - for completed task
         const newTodo = document.createElement("li");
         newTodo.innerHTML = todoal; 
         newTodo.classList.add("todo-item");
         todoDiv.appendChild(newTodo);
-        // newTodo.appendChild(timeInput);
 
         const btnDiv = document.createElement("div");
         btnDiv.classList.add("btn-div");
@@ -225,7 +231,7 @@ function getLocalTodos() {
 
         todoList.appendChild(todoDiv);
 
-        // console.log(localStorage.getItem("todosal"))
+        console.log(todoal)
     });
 }
 
