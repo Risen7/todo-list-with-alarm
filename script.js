@@ -91,6 +91,21 @@ function addTodo(event) {
     else {
         saveLocalTodos(todoInputDatNot)
     }
+    let checkNum = 0;
+    let todosal;
+    if(localStorage.getItem("todosal") === null) {
+        todosal = [];
+    } else {
+        todosal = JSON.parse(localStorage.getItem("todosal"));
+    }
+    todosal.forEach(function(todoal) {
+        checkNum++;
+        checkSave.push(checkNum);
+        console.log(checkNum);
+        console.log(checkSave);
+    });
+
+
 
     //ADDING TO LOCAL STORAGE 
     // saveLocalTodos(todoInput.value,);
@@ -131,18 +146,21 @@ function deleteCheck(e) {
 
     if(item.classList[0] === "complete-btn") {
         const todoal = item.parentElement.parentElement;
-        todoal.classList.toggle("completed");
-
-        if(todoal.dataset.check == null) {
-            todoal.setAttribute("data-check", true);
-        }
-        else if(todoal.dataset.check == "true") {
-            todoal.removeAttribute("data-check");
-        }   
+        todoal.classList.toggle("completed"); 
     }
+
+    const todochk = item.firstChild;
+    if(todochk.dataset.check == null) {
+        todochk.setAttribute("data-check", true);
+    }
+    else if(todochk.dataset.check == "true") {
+        todochk.removeAttribute("data-check");
+    }  
 
     //-------------------------testing getting all todo from local storage-------------------------------------------->
 
+    let checkNum = 0;
+    let checkSave = [];
     let todosal;
     if(localStorage.getItem("todosal") === null) {
         todosal = [];
@@ -150,12 +168,13 @@ function deleteCheck(e) {
         todosal = JSON.parse(localStorage.getItem("todosal"));
     }
     todosal.forEach(function(todoal) {
-
-        
-
-        console.log(todoal)
+        checkNum++;
+        checkSave.push(checkNum);
+        console.log(checkNum);
+        console.log(checkSave);
+        console.log(checkSave.length + "check length");
+        console.log(todosal.length + "todosal length");
     });
-
 
     //---------------------------------------------------------------------------------------------------------------->    
 }
