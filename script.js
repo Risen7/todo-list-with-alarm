@@ -91,21 +91,6 @@ function addTodo(event) {
     else {
         saveLocalTodos(todoInputDatNot)
     }
-    let checkNum = 0;
-    let todosal;
-    if(localStorage.getItem("todosal") === null) {
-        todosal = [];
-    } else {
-        todosal = JSON.parse(localStorage.getItem("todosal"));
-    }
-    todosal.forEach(function(todoal) {
-        checkNum++;
-        checkSave.push(checkNum);
-        console.log(checkNum);
-        console.log(checkSave);
-    });
-
-
 
     //ADDING TO LOCAL STORAGE 
     // saveLocalTodos(todoInput.value,);
@@ -118,6 +103,8 @@ function addTodo(event) {
     const completedButton = document.createElement("button");
     completedButton.innerHTML = '<i class="fas fa-check"></li>';
     completedButton.classList.add("complete-btn");
+    completedButton.setAttribute("id", "complete-btn");
+    completedButton.setAttribute("data-check", "false");
     btnDiv.appendChild(completedButton);
 
     const trashButton = document.createElement("button");
@@ -128,7 +115,27 @@ function addTodo(event) {
     todoList.appendChild(todoDiv);
     todoInput.value = "";
     // console.log(todoInputDate);
+
+        // Get the data attribute of current saved data from storage after adding To Do------------------->
+    let checkNum = 0;
+    let todosal;
+    let dataCheck = document.getElementById("complete-btn");
+    if(localStorage.getItem("todosal") === null) {
+        todosal = [];
+    } else {
+        todosal = JSON.parse(localStorage.getItem("todosal"));
+    }
+    todosal.forEach(function(todoal) { 
+        
+        checkNum = dataCheck.dataset.check;
+        checkSave.push(checkNum);
+        localStorage.setItem("checkSave", JSON.stringify(checkSave));
+        // console.log(checkNum, " Data check");
+        // console.log(checkSave, " Data to Local Storage");
+        });
+    
 }
+
 
 function deleteCheck(e) {
     const item = e.target;
@@ -148,33 +155,44 @@ function deleteCheck(e) {
         const todoal = item.parentElement.parentElement;
         todoal.classList.toggle("completed"); 
     }
-
-    const todochk = item.firstChild;
-    if(todochk.dataset.check == null) {
+    const todochk = item;
+    if(todochk.dataset.check == "false") {
         todochk.setAttribute("data-check", true);
     }
     else if(todochk.dataset.check == "true") {
-        todochk.removeAttribute("data-check");
+        todochk.setAttribute("data-check", false);
     }  
 
-    //-------------------------testing getting all todo from local storage-------------------------------------------->
+    //-------------------------GET Data from storage -------------------------------------------->
+    checkSave = JSON.parse(localStorage.getItem("checkSave"));
+    console.log(checkSave + "check save");
+    // checkSave.forEach(function(checkNum) {
+        
+    // });
+    // let checkNum = 0;
+    // let checkSave = [];
+    // let todosal;
+    // if(localStorage.getItem("todosal") === null) {
+    //     todosal = [];
+    // } else {
+    //     todosal = JSON.parse(localStorage.getItem("todosal"));
+    // }
+    // todosal.forEach(function(todoal) {
+        // checkNum++;
+        
 
-    let checkNum = 0;
-    let checkSave = [];
-    let todosal;
-    if(localStorage.getItem("todosal") === null) {
-        todosal = [];
-    } else {
-        todosal = JSON.parse(localStorage.getItem("todosal"));
-    }
-    todosal.forEach(function(todoal) {
-        checkNum++;
-        checkSave.push(checkNum);
-        console.log(checkNum);
-        console.log(checkSave);
-        console.log(checkSave.length + "check length");
-        console.log(todosal.length + "todosal length");
-    });
+        
+        // console.log(checkNum + "Data Value");
+        // console.log(checkSave + "Saved to Local");
+        // console.log(checkSave.length + "check length");
+        // console.log(todosal.length + "todosal length");
+    // });
+
+    //-------------------------Save the data-check of a item ------------------------------------>
+
+
+    // checkSave.push(checkNum);
+
 
     //---------------------------------------------------------------------------------------------------------------->    
 }
