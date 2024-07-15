@@ -130,8 +130,8 @@ function addTodo(event) {
         checkNum = dataCheck.dataset.check;
         checkSave.push(checkNum);
         localStorage.setItem("checkSave", JSON.stringify(checkSave));
-        // console.log(checkNum, "--checkNum");
-        // console.log(checkSave, " Data to Local Storage");
+        console.log(checkNum, "--checkNum");
+        console.log(checkSave, " Data to Local Storage");
         // });
 
 }
@@ -168,23 +168,21 @@ function deleteCheck(e) {
 
 
     //-------------------------change the dataaset and Save the data-check of a element ------------------------------------>
+    
+    // let dataCheck = document.getElementById("complete-btn");
+    // let checkDat = 0;
 
-        checkSave.forEach(function() { 
-        let checkNum = 0;
-        checkNum = dataCheck.dataset.check;
-        checkSave.push(checkNum);
-        localStorage.setItem("checkSave", JSON.stringify(checkSave));
-        console.log(checkNum + " --check save");
+    checkSave = JSON.parse(localStorage.getItem("checkSave"));
+
+    checkSave.forEach(function(checkNum) { 
+            checkDat = todochk.dataset.check;
+            checkSave.push(checkDat);
+            // localStorage.setItem("checkSave", JSON.stringify(checkSave));
+            console.log(checkDat + " --check save");
         });
-    // checkSave = JSON.parse(localStorage.getItem("checkSave"));
-        
-    // checkSave.forEach(function(checkNum) {
-
-    // checkSave.push(checkNum);
-
 
     //---------------------------------------------------------------------------------------------------------------->    
-}
+}   
 
 function filterTodo(e) {
     const todosal = todoList.childNodes;
