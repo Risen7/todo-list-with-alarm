@@ -116,7 +116,7 @@ function addTodo(event) {
     todoInput.value = "";
     // console.log(todoInputDate);
 
-        // Get the data attribute of current saved data from storage after adding To Do------------------->
+        // Add new data-check false------------------->
     let checkNum = 0;
     let todosal;
     let dataCheck = document.getElementById("complete-btn");
@@ -125,15 +125,15 @@ function addTodo(event) {
     } else {
         todosal = JSON.parse(localStorage.getItem("todosal"));
     }
-    todosal.forEach(function(todoal) { 
+    // todosal.forEach(function(todoal) { 
         
         checkNum = dataCheck.dataset.check;
         checkSave.push(checkNum);
         localStorage.setItem("checkSave", JSON.stringify(checkSave));
-        // console.log(checkNum, " Data check");
+        // console.log(checkNum, "--checkNum");
         // console.log(checkSave, " Data to Local Storage");
-        });
-    
+        // });
+
 }
 
 
@@ -163,33 +163,22 @@ function deleteCheck(e) {
         todochk.setAttribute("data-check", false);
     }  
 
-    //-------------------------GET Data from storage -------------------------------------------->
-    checkSave = JSON.parse(localStorage.getItem("checkSave"));
-    console.log(checkSave + "check save");
+    
+
+
+
+    //-------------------------change the dataaset and Save the data-check of a element ------------------------------------>
+
+        checkSave.forEach(function() { 
+        let checkNum = 0;
+        checkNum = dataCheck.dataset.check;
+        checkSave.push(checkNum);
+        localStorage.setItem("checkSave", JSON.stringify(checkSave));
+        console.log(checkNum + " --check save");
+        });
+    // checkSave = JSON.parse(localStorage.getItem("checkSave"));
+        
     // checkSave.forEach(function(checkNum) {
-        
-    // });
-    // let checkNum = 0;
-    // let checkSave = [];
-    // let todosal;
-    // if(localStorage.getItem("todosal") === null) {
-    //     todosal = [];
-    // } else {
-    //     todosal = JSON.parse(localStorage.getItem("todosal"));
-    // }
-    // todosal.forEach(function(todoal) {
-        // checkNum++;
-        
-
-        
-        // console.log(checkNum + "Data Value");
-        // console.log(checkSave + "Saved to Local");
-        // console.log(checkSave.length + "check length");
-        // console.log(todosal.length + "todosal length");
-    // });
-
-    //-------------------------Save the data-check of a item ------------------------------------>
-
 
     // checkSave.push(checkNum);
 
@@ -270,6 +259,30 @@ function getLocalTodos() {
 
         console.log(todoal)
     });
+
+
+        //-------------------------GET Data from storage -------------------------------------------->
+
+        
+    // });
+    // let checkNum = 0;
+    // let checkSave = [];
+    // let todosal;
+    // if(localStorage.getItem("todosal") === null) {
+    //     todosal = [];
+    // } else {
+    //     todosal = JSON.parse(localStorage.getItem("todosal"));
+    // }
+    // todosal.forEach(function(todoal) {
+        // checkNum++;
+        
+
+        
+        // console.log(checkNum + "Data Value");
+        // console.log(checkSave + "Saved to Local");
+        // console.log(checkSave.length + "check length");
+        // console.log(todosal.length + "todosal length");
+    // });
 }
 
 function removeLocalTodos(todoal) {
