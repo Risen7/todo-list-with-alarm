@@ -21,6 +21,7 @@ let alarmListArr = [];
 let alarmCount = 0;
 let alarmTM;
 let checkSave = [];
+let dateSave = [];
 
 function addTodo(event) {
     //12 hour format input time--------------------------------------->
@@ -105,6 +106,7 @@ function addTodo(event) {
     completedButton.classList.add("complete-btn");
     completedButton.setAttribute("id", "complete-btn");
     completedButton.setAttribute("data-check", "false");
+    completedButton.setAttribute("data-num", alarmCount);
     btnDiv.appendChild(completedButton);
 
     const trashButton = document.createElement("button");
@@ -118,8 +120,10 @@ function addTodo(event) {
 
         // Add new data-check false------------------->
     let checkNum = 0;
+    let dataSav = 0;
     let todosal;
     let dataCheck = document.getElementById("complete-btn");
+    let dataNum = document.getElementById("complete-btn");
     if(localStorage.getItem("todosal") === null) {
         todosal = [];
     } else {
@@ -133,6 +137,10 @@ function addTodo(event) {
         console.log(checkNum, "--checkNum");
         console.log(checkSave, " Data to Local Storage");
         // });
+
+        checkNum = dataNum.dataset.num;
+        dateSave.push(dataSav);
+        localStorage.setItem("dateSave", JSON.stringify(dateSave));
 
 }
 
@@ -171,14 +179,28 @@ function deleteCheck(e) {
     
     // let dataCheck = document.getElementById("complete-btn");
     // let checkDat = 0;
-
+    
     checkSave = JSON.parse(localStorage.getItem("checkSave"));
+    let i = 0;
 
-    checkSave.forEach(function(checkNum) { 
-            checkDat = todochk.dataset.check;
+    checkSave.forEach(function(checkNum) {
+        const todoAtt = item; 
+        
+        i++;
+        if(todoAtt.dataset.check == "true") {
+            checkDat = true;
+            console.log("IF TRUE")
+        }
+        else {
+            checkDat = false;
+            console.log("ELSE")
+        }
+            // checkDat = todochk.dataset.check;
             checkSave.push(checkDat);
             // localStorage.setItem("checkSave", JSON.stringify(checkSave));
             console.log(checkDat + " --check save");
+            console.log(checkSave);
+            console.log(i);
         });
 
     //---------------------------------------------------------------------------------------------------------------->    
@@ -246,8 +268,13 @@ function getLocalTodos() {
         const completedButton = document.createElement("button");
         completedButton.innerHTML = '<i class="fas fa-check"></li>';
         completedButton.classList.add("complete-btn");
-        btnDiv.appendChild(completedButton);
+        completedButton.setAttribute("id", "complete-btn");
+        //-----------------------------------------extract from storage if datacheck is true or false--------------->
+        completedButton.setAttribute("data-check", "false");
+        completedButton.setAttribute("data-num", alarmCount);
 
+
+        btnDiv.appendChild(completedButton);
         const trashButton = document.createElement("button");
         trashButton.innerHTML = '<i class="fas fa-x"></li >';
         trashButton.classList.add("trash-btn");
