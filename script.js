@@ -21,7 +21,7 @@ let alarmListArr = [];
 let alarmCount = 0;
 let alarmTM;
 let checkSave = [];
-let dateSave = [];
+let dataSave = [];
 
 function addTodo(event) {
     //12 hour format input time--------------------------------------->
@@ -139,8 +139,8 @@ function addTodo(event) {
         // });
 
         checkNum = dataNum.dataset.num;
-        dateSave.push(dataSav);
-        localStorage.setItem("dateSave", JSON.stringify(dateSave));
+        dataSave.push(dataSav);
+        localStorage.setItem("dataSave", JSON.stringify(dataSave));
 
 }
 
@@ -244,13 +244,14 @@ function saveLocalTodos(todoal) {
 
 function getLocalTodos() {
     let todosal;
+    let checkCnt = 0;
     if(localStorage.getItem("todosal") === null) {
         todosal = [];
     } else {
         todosal = JSON.parse(localStorage.getItem("todosal"));
     }
     todosal.forEach(function(todoal) {
-
+        checkCnt++;
         let todoInputDate = `${todoInput.value} - ${dateStr}`;
         // event.preventDefault();
         const timeInput = document.createElement("span")
@@ -270,8 +271,8 @@ function getLocalTodos() {
         completedButton.classList.add("complete-btn");
         completedButton.setAttribute("id", "complete-btn");
         //-----------------------------------------extract from storage if datacheck is true or false--------------->
-        completedButton.setAttribute("data-check", "false");
-        completedButton.setAttribute("data-num", alarmCount);
+        // completedButton.setAttribute("data-check", "false");
+        completedButton.setAttribute("data-num", checkCnt);
 
 
         btnDiv.appendChild(completedButton);
@@ -285,6 +286,13 @@ function getLocalTodos() {
         console.log(todoal)
     });
 
+    // checkSave.forEach(function(checkNum) {
+
+    // });
+
+    dataSave.forEach(function(dataSav) {
+        completedButton.setAttribute("data-num", dataSav);
+    });
 
         //-------------------------GET Data from storage -------------------------------------------->
 
