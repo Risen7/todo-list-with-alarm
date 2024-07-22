@@ -47,7 +47,7 @@ function addTodo(event) {
     // let mm = (minutes<10 ? "0"+minutes : minutes);
     
 
-      alert("Alarm Set To " + hm + ':' + minutes + ' ' + meridian);
+    //   alert("Alarm Set To" + ' ' + hm + ':' + minutes + ' ' + meridian);
     //-------------------------------------------------------------->
 
     // ADD ALARM---------------------------------------------------->
@@ -88,9 +88,11 @@ function addTodo(event) {
         alrmInput.innerText = alarmTime;
         newTodo.appendChild(alrmInput);
         saveLocalTodos(todoInputDat)
+        alert("Todo List with Alarm Set To" + ' ' + hm + ':' + minutes + ' ' + meridian);
     }
     else {
         saveLocalTodos(todoInputDatNot)
+        alert("Todo Lists Set");
     }
 
     //ADDING TO LOCAL STORAGE 
@@ -141,7 +143,7 @@ function addTodo(event) {
         checkNum = dataNum.dataset.num;
         dataSave.push(dataSav);
         localStorage.setItem("dataSave", JSON.stringify(dataSave));
-
+        location.reload();
 }
 
 
