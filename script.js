@@ -6,7 +6,6 @@ const testBtn = document.querySelector(".testBtn");
 const ring = new Audio('alarm-ring.wav');
 let setAlarm = document.getElementById("setAlarm");
 const checkBx = document.getElementById("myCheck");
-
 document.addEventListener("DOMContentLoaded", getLocalTodos);
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteCheck);
@@ -173,8 +172,6 @@ function deleteCheck(e) {
         todochk.setAttribute("data-check", false);
     }  
 
-    
-
 
 
     //-------------------------change the dataaset and Save the data-check of a element ------------------------------------>
@@ -183,11 +180,11 @@ function deleteCheck(e) {
     // let checkDat = 0;
     
     checkSave = JSON.parse(localStorage.getItem("checkSave"));
-    let i = 0;
-
+    let i = 1;
+    
     checkSave.forEach(function(checkNum) {
         const todoAtt = item; 
-        
+        let todoLst = document.getElementById("todoList");
         i++;
         if(todoAtt.dataset.check == "true") {
             checkDat = true;
@@ -199,12 +196,13 @@ function deleteCheck(e) {
         }
             // checkDat = todochk.dataset.check;
             checkSave.push(checkDat);
+            
+            console.log(todoLst.children[2])
             // localStorage.setItem("checkSave", JSON.stringify(checkSave));
             console.log(checkDat + " --check save");
             console.log(checkSave);
             console.log(i);
         });
-
     //---------------------------------------------------------------------------------------------------------------->    
 }   
 
