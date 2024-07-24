@@ -11,6 +11,7 @@ todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteCheck);
 filterOption.addEventListener("change", filterTodo);
 ring.loop = true;
+let saveCheck = Boolean;
 // testBtn.addEventListener("click", getLocalTodos);
 
 let dateIn = new Date();
@@ -149,7 +150,7 @@ function addTodo(event) {
 function deleteCheck(e) {
     const item = e.target;
     // console.log(item);
-
+    saveCheck = true;
     if(item.classList[0] === "trash-btn") {
         const todoal = item.parentElement.parentElement;
         todoal.classList.add("slide");
@@ -196,13 +197,15 @@ function deleteCheck(e) {
         }
             // checkDat = todochk.dataset.check;
             checkSave.push(checkDat);
-            
-            console.log(todoLst.children[2])
+            console.log(i + "ay")
+            console.log(todoLst.children[1]);
+            console.log(todoLst.children[1].children[1].children[0].dataset.check);
             // localStorage.setItem("checkSave", JSON.stringify(checkSave));
-            console.log(checkDat + " --check save");
-            console.log(checkSave);
-            console.log(i);
+            // console.log(checkDat + " --check save");
+            // console.log(checkSave);
+            // console.log(i);
         });
+        
     //---------------------------------------------------------------------------------------------------------------->    
 }   
 
@@ -271,7 +274,13 @@ function getLocalTodos() {
         completedButton.classList.add("complete-btn");
         completedButton.setAttribute("id", "complete-btn");
         //-----------------------------------------extract from storage if datacheck is true or false--------------->
-        // completedButton.setAttribute("data-check", "false");
+        // if(saveCheck == "true") {
+            completedButton.setAttribute("data-check", "false");
+        // }
+        // else {
+        //     completedButton.setAttribute("data-check", "waley");
+        // }
+        
         completedButton.setAttribute("data-num", checkCnt);
 
 
