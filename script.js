@@ -6,13 +6,11 @@ const testBtn = document.querySelector(".testBtn");
 const ring = new Audio('alarm-ring.wav');
 let setAlarm = document.getElementById("setAlarm");
 const checkBx = document.getElementById("myCheck");
-document.addEventListener("DOMContentLoaded", getLocalTodos);
+document.addEventListener("DOMContentLoaded", loadData);
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteCheck);
 filterOption.addEventListener("change", filterTodo);
 ring.loop = true;
-let saveCheck = Boolean;
-// testBtn.addEventListener("click", getLocalTodos);
 
 let dateIn = new Date();
 let dateStr = dateIn.toDateString(); 
@@ -20,8 +18,6 @@ let setTm = document.querySelector("#aSet");
 let alarmListArr = [];
 let alarmCount = 0;
 let alarmTM;
-let checkSave = [];
-let dataSave = [];
 
 function addTodo(event) {
     //12 hour format input time--------------------------------------->
@@ -44,107 +40,70 @@ function addTodo(event) {
     }
 
     let hm = (hours<10 ? "0"+hours : hours)
-    // let mm = (minutes<10 ? "0"+minutes : minutes);
-    
-
-    //   alert("Alarm Set To" + ' ' + hm + ':' + minutes + ' ' + meridian);
     //-------------------------------------------------------------->
 
     // ADD ALARM---------------------------------------------------->
     alarmCount++;
-    
     alarmTM = `${hm}:${minutes}:00 ${meridian}`;
     alarmListArr.push(alarmTM);
-    console.log(alarmTM);
-    console.log(alarmListArr);
-    console.log(alarmCount);
-
     //-------------------------------------------------------------->
-
-    // let alarmTime = `${setTm.value}`; - previous code
-    let alarmTime = `${hours}:${minutes} ${meridian}`
-    let todoInputDate = `${todoInput.value} - ${dateStr}`;
-
-    //Don't Save in Local Storage Alarm TIME input if no alarm or with alarm
-
-    let todoInputDat = `${todoInput.value}<div class="setTm">${alarmTime}</div><span class="encTime">${dateStr}</span>`
-    let todoInputDatNot = `${todoInput.value}<span class="encTime">${dateStr}</span>`
-    event.preventDefault();
-    const timeInput = document.createElement("span");
-    timeInput.classList.add("encTime");
-    timeInput.innerText = dateStr;
-    const alrmInput = document.createElement("div");
-    const todoDiv = document.createElement("div");
-    todoDiv.classList.add("todoal");
-    const newTodo = document.createElement("li");
-    newTodo.innerText = todoInput.value; 
-    newTodo.classList.add("todo-item");
-    todoDiv.appendChild(newTodo);
-    newTodo.appendChild(timeInput);
-
-    //Don't Display Alarm TIME input if no alarm or with alarm
-    if(checkBx.checked == false) {
-        alrmInput.classList.add("setTm");
-        alrmInput.innerText = alarmTime;
-        newTodo.appendChild(alrmInput);
-        saveLocalTodos(todoInputDat)
-        alert("Todo List with Alarm Set To" + ' ' + hm + ':' + minutes + ' ' + meridian);
+// let alarmTime = `${setTm.value}`; - previous code
+    if(todoInput.value === ''){
+        alert("YOU MUST WRITE SOME TODO's! Empty not Allowed!")
     }
     else {
-        saveLocalTodos(todoInputDatNot)
-        alert("Todo Lists Set");
-    }
+        let alarmTime = `${hours}:${minutes} ${meridian}`
+        let todoInputDate = `${todoInput.value} - ${dateStr}`;
 
-    //ADDING TO LOCAL STORAGE 
-    // saveLocalTodos(todoInput.value,);
-    // saveLocalTodos(todoInputDat)
+//Don't Save in Local Storage Alarm TIME input if no alarm or with alarm
 
-    
-    const btnDiv = document.createElement("div");
-    btnDiv.classList.add("btn-div");
-    todoDiv.appendChild(btnDiv);
-    const completedButton = document.createElement("button");
-    completedButton.innerHTML = '<i class="fas fa-check"></li>';
-    completedButton.classList.add("complete-btn");
-    completedButton.setAttribute("id", "complete-btn");
-    completedButton.setAttribute("data-check", "false");
-    completedButton.setAttribute("data-num", alarmCount);
-    btnDiv.appendChild(completedButton);
+        let todoInputDat = `${todoInput.value}<div class="setTm">${alarmTime}</div><span class="encTime">${dateStr}</span>`
+        let todoInputDatNot = `${todoInput.value}<span class="encTime">${dateStr}</span>`
+        event.preventDefault();
+        const timeInput = document.createElement("span");
+        timeInput.classList.add("encTime");
+        timeInput.innerText = dateStr;
+        const alrmInput = document.createElement("div");
+        const todoDiv = document.createElement("div");
+        todoDiv.classList.add("todoal");
+        const newTodo = document.createElement("li");
+        newTodo.innerText = todoInput.value; 
+        newTodo.classList.add("todo-item");
+        todoDiv.appendChild(newTodo);
+        newTodo.appendChild(timeInput);
 
-    const trashButton = document.createElement("button");
-    trashButton.innerHTML = '<i class="fas fa-x"></li>';
-    trashButton.classList.add("trash-btn");
-    btnDiv.appendChild(trashButton);
-    
-    todoList.appendChild(todoDiv);
-    todoInput.value = "";
-    // console.log(todoInputDate);
+        const btnDiv = document.createElement("div");
+        btnDiv.classList.add("btn-div");
+        todoDiv.appendChild(btnDiv);
+        const completedButton = document.createElement("button");
+        completedButton.innerHTML = '<i class="fas fa-check"></li>';
+        completedButton.classList.add("complete-btn");
+        btnDiv.appendChild(completedButton);
 
-        // Add new data-check false------------------->
-    let checkNum = 0;
-    let dataSav = 0;
-    let todosal;
-    let dataCheck = document.getElementById("complete-btn");
-    let dataNum = document.getElementById("complete-btn");
-    if(localStorage.getItem("todosal") === null) {
-        todosal = [];
-    } else {
-        todosal = JSON.parse(localStorage.getItem("todosal"));
-    }
-    // todosal.forEach(function(todoal) { 
+        const trashButton = document.createElement("button");
+        trashButton.innerHTML = '<i class="fas fa-x"></li>';
+        trashButton.classList.add("trash-btn");
+        btnDiv.appendChild(trashButton);
         
-        checkNum = dataCheck.dataset.check;
-        checkSave.push(checkNum);
-        localStorage.setItem("checkSave", JSON.stringify(checkSave));
-        console.log(checkNum, "--checkNum");
-        console.log(checkSave, " Data to Local Storage");
-        // });
+        todoList.appendChild(todoDiv);
+        todoInput.value = "";
 
-        checkNum = dataNum.dataset.num;
-        dataSave.push(dataSav);
-        localStorage.setItem("dataSave", JSON.stringify(dataSave));
-        location.reload();
-}
+//Don't Display Alarm TIME input if no alarm or with alarm
+        if(checkBx.checked == false) {
+            alrmInput.classList.add("setTm");
+            alrmInput.innerText = alarmTime;
+            newTodo.appendChild(alrmInput);
+            saveLocalTodos(todoInputDat)
+            saveData();
+            alert("Todo List with Alarm Set To" + ' ' + hm + ':' + minutes + ' ' + meridian);
+        }
+        else {
+// saveLocalTodos(todoInputDatNot);
+            saveData();
+            alert("Todo Lists Set");
+        }
+    }
+};
 
 
 function deleteCheck(e) {
@@ -158,55 +117,16 @@ function deleteCheck(e) {
         removeLocalTodos(todoal);
         todoal.addEventListener("transitionend", function() {
             todoal.remove();
+            saveData();
         });
     }
 
     if(item.classList[0] === "complete-btn") {
         const todoal = item.parentElement.parentElement;
         todoal.classList.toggle("completed"); 
+        saveData();
     }
-    const todochk = item;
-    if(todochk.dataset.check == "false") {
-        todochk.setAttribute("data-check", true);
-    }
-    else if(todochk.dataset.check == "true") {
-        todochk.setAttribute("data-check", false);
-    }  
 
-
-
-    //-------------------------change the dataaset and Save the data-check of a element ------------------------------------>
-    
-    // let dataCheck = document.getElementById("complete-btn");
-    // let checkDat = 0;
-    
-    checkSave = JSON.parse(localStorage.getItem("checkSave"));
-    let i = 1;
-    
-    checkSave.forEach(function(checkNum) {
-        const todoAtt = item; 
-        let todoLst = document.getElementById("todoList");
-        i++;
-        if(todoAtt.dataset.check == "true") {
-            checkDat = true;
-            console.log("IF TRUE")
-        }
-        else {
-            checkDat = false;
-            console.log("ELSE")
-        }
-            // checkDat = todochk.dataset.check;
-            checkSave.push(checkDat);
-            console.log(i + "ay")
-            console.log(todoLst.children[1]);
-            console.log(todoLst.children[1].children[1].children[0].dataset.check);
-            // localStorage.setItem("checkSave", JSON.stringify(checkSave));
-            // console.log(checkDat + " --check save");
-            // console.log(checkSave);
-            // console.log(i);
-        });
-        
-    //---------------------------------------------------------------------------------------------------------------->    
 }   
 
 function filterTodo(e) {
@@ -245,16 +165,22 @@ function saveLocalTodos(todoal) {
     localStorage.setItem("todosal", JSON.stringify(todosal));
 }
 
+function saveData() {
+    localStorage.setItem("todoData", todoList.innerHTML);
+}
+
+function loadData() {
+    todoList.innerHTML = localStorage.getItem("todoData");
+}
+
 function getLocalTodos() {
     let todosal;
-    let checkCnt = 0;
     if(localStorage.getItem("todosal") === null) {
         todosal = [];
     } else {
         todosal = JSON.parse(localStorage.getItem("todosal"));
     }
     todosal.forEach(function(todoal) {
-        checkCnt++;
         let todoInputDate = `${todoInput.value} - ${dateStr}`;
         // event.preventDefault();
         const timeInput = document.createElement("span")
@@ -272,59 +198,14 @@ function getLocalTodos() {
         const completedButton = document.createElement("button");
         completedButton.innerHTML = '<i class="fas fa-check"></li>';
         completedButton.classList.add("complete-btn");
-        completedButton.setAttribute("id", "complete-btn");
-        //-----------------------------------------extract from storage if datacheck is true or false--------------->
-        // if(saveCheck == "true") {
-            completedButton.setAttribute("data-check", "false");
-        // }
-        // else {
-        //     completedButton.setAttribute("data-check", "waley");
-        // }
-        
-        completedButton.setAttribute("data-num", checkCnt);
-
 
         btnDiv.appendChild(completedButton);
         const trashButton = document.createElement("button");
         trashButton.innerHTML = '<i class="fas fa-x"></li >';
         trashButton.classList.add("trash-btn");
         btnDiv.appendChild(trashButton);
-
         todoList.appendChild(todoDiv);
-
-        console.log(todoal)
     });
-
-    // checkSave.forEach(function(checkNum) {
-
-    // });
-
-    dataSave.forEach(function(dataSav) {
-        completedButton.setAttribute("data-num", dataSav);
-    });
-
-        //-------------------------GET Data from storage -------------------------------------------->
-
-        
-    // });
-    // let checkNum = 0;
-    // let checkSave = [];
-    // let todosal;
-    // if(localStorage.getItem("todosal") === null) {
-    //     todosal = [];
-    // } else {
-    //     todosal = JSON.parse(localStorage.getItem("todosal"));
-    // }
-    // todosal.forEach(function(todoal) {
-        // checkNum++;
-        
-
-        
-        // console.log(checkNum + "Data Value");
-        // console.log(checkSave + "Saved to Local");
-        // console.log(checkSave.length + "check length");
-        // console.log(todosal.length + "todosal length");
-    // });
 }
 
 function removeLocalTodos(todoal) {
@@ -378,23 +259,17 @@ function update(){
             if(alarmListArr[i] == `${hours}:${mins}:${secs} ${amOrPm}`){
                 ring.load();
                 ring.play();
-                console.log(`alarm ringing! + ${i}`)
+                // console.log(`alarm ringing! + ${i}`)
                 document.querySelector(".testBtn").style.visibility= "visible";
             // alert("ALARM IS RINGING")
             }
         }
-
-    //----------------------------------------------------------------->
-
-        return`${hours}:${mins}:${secs} ${amOrPm}`
-        
+        return`${hours}:${mins}:${secs} ${amOrPm}` 
     }
-
     function formatZeroes(time){
         time = time.toString();
         return time.length < 2 ? "0" + time : time;
     }
-
 }
 
 
@@ -405,14 +280,6 @@ checkBx.onchange = function() {
     else {
         document.getElementById("setAlarm").style.visibility = "visible";    
     }
-
-    // if(checkBx.checked){
-    //     document.getElementById("setAlarm").style.display = "none";
-    // }
-    // else {
-    //     document.getElementById("setAlarm").style.display = "flex";    
-    // }
-    
 }
     
-  
+ 
