@@ -38,14 +38,19 @@ function addTodo(event) {
     } else {
         meridian = 'PM';
     }
-
     let hm = (hours<10 ? "0"+hours : hours)
-    //-------------------------------------------------------------->
 
-    // ADD ALARM---------------------------------------------------->
+//oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--END--ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo>
+
+
+
+//oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--ADD ALARM--ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo>
+
     alarmCount++;
     alarmTM = `${hm}:${minutes}:00 ${meridian}`;
     alarmListArr.push(alarmTM);
+    let alarmTime = `${hours}:${minutes} ${meridian}`
+    let todoInputDate = `${todoInput.value} - ${dateStr}`;
     //-------------------------------------------------------------->
 // let alarmTime = `${setTm.value}`; - previous code
     if(todoInput.value === ''){
@@ -255,21 +260,28 @@ function update(){
         secs = formatZeroes(secs);
 
             //Alarm Trigger --------------------------------------------------->
-        for(let i=0; i<alarmListArr.length; i++){
-            if(alarmListArr[i] == `${hours}:${mins}:${secs} ${amOrPm}`){
-                ring.load();
-                ring.play();
-                // console.log(`alarm ringing! + ${i}`)
-                document.querySelector(".testBtn").style.visibility= "visible";
-            // alert("ALARM IS RINGING")
+            for(let i=0; i<alarmListArr.length; i++){
+                if(alarmListArr[i] == `${hours}:${mins}:${secs} ${amOrPm}`){
+                    ring.load();
+                    ring.play();
+                    console.log(`alarm ringing! + ${i}`)
+                    document.querySelector(".testBtn").style.visibility= "visible";
+                // alert("ALARM IS RINGING")
+                }
             }
+            return`${hours}:${mins}:${secs} ${amOrPm}` 
+    
+    ///oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--END--oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo>
+    
+    
+    
+    ///ooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--ADD ZERO for Single DIGIT--ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo>
+                   
         }
-        return`${hours}:${mins}:${secs} ${amOrPm}` 
-    }
-    function formatZeroes(time){
-        time = time.toString();
-        return time.length < 2 ? "0" + time : time;
-    }
+        function formatZeroes(time){
+            time = time.toString();
+            return time.length < 2 ? "0" + time : time;
+        }
 }
 
 
