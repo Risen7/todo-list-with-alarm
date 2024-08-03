@@ -6,6 +6,7 @@ const testBtn = document.querySelector(".testBtn");
 const ring = new Audio('alarm-ring.wav');
 let setAlarm = document.getElementById("setAlarm");
 const checkBx = document.getElementById("myCheck");
+document.addEventListener("DOMContentLoaded", loadData);
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteCheck);
 filterOption.addEventListener("change", filterTodo);
@@ -17,7 +18,7 @@ let setTm = document.querySelector("#aSet");
 let alarmListArr = [];
 let alarmCount = 0;
 let alarmTM;
-document.addEventListener("DOMContentLoaded", loadData);
+
 function addTodo(event) {
     //12 hour format input time--------------------------------------->
     var timeSplit = setTm.value.split(':'),
@@ -37,20 +38,17 @@ function addTodo(event) {
     } else {
         meridian = 'PM';
     }
-    let hm = (hours<10 ? "" + hours : hours)
 
-//oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--END--ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo>
+    let hm = (hours<10 ? "0" + hours : hours)
+    //-------------------------------------------------------------->
 
-
-
-//oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--ADD ALARM--ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo>
-
+    // ADD ALARM---------------------------------------------------->
     alarmCount++;
     alarmTM = `${hm}:${minutes}:00 ${meridian}`;
-    // alarmListArr.push(alarmTM);
     let alarmTime = `${hours}:${minutes} ${meridian}`
     let todoInputDate = `${todoInput.value} - ${dateStr}`;
     saveAlarm();
+    // alarmListArr.push(alarmTM);
     //-------------------------------------------------------------->
 // let alarmTime = `${setTm.value}`; - previous code
     if(todoInput.value === ''){
@@ -59,7 +57,6 @@ function addTodo(event) {
     else {
         let alarmTime = `${hours}:${minutes} ${meridian}`
         let todoInputDate = `${todoInput.value} - ${dateStr}`;
-
 
 //Don't Save in Local Storage Alarm TIME input if no alarm or with alarm
 
@@ -188,8 +185,8 @@ function loadData() {
 }
 
 function loadAlarm() {
-        alarmListArr = JSON.parse(localStorage.getItem("alarmData"));
-        console.log(alarmListArr);
+    alarmListArr = JSON.parse(localStorage.getItem("alarmData"));
+    console.log(alarmListArr);
 }
 
 function getLocalTodos() {
@@ -274,28 +271,21 @@ function update(){
         secs = formatZeroes(secs);
 
             //Alarm Trigger --------------------------------------------------->
-            for(let i=0; i<alarmListArr.length; i++){
-                if(alarmListArr[i] == `${hours}:${mins}:${secs} ${amOrPm}`){
-                    ring.load();
-                    ring.play();
-                    console.log(`alarm ringing! + ${i}`)
-                    document.querySelector(".testBtn").style.visibility= "visible";
-                // alert("ALARM IS RINGING")
-                }
+        for(let i=0; i<alarmListArr.length; i++){
+            if(alarmListArr[i] == `${hours}:${mins}:${secs} ${amOrPm}`){
+                ring.load();
+                ring.play();
+                // console.log(`alarm ringing! + ${i}`)
+                document.querySelector(".testBtn").style.visibility= "visible";
+            // alert("ALARM IS RINGING")
             }
-            return`${hours}:${mins}:${secs} ${amOrPm}` 
-    
-    ///oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--END--oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo>
-    
-    
-    
-    ///ooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--ADD ZERO for Single DIGIT--ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo>
-                   
         }
-        function formatZeroes(time){
-            time = time.toString();
-            return time.length < 2 ? "0" + time : time;
-        }
+        return`${hours}:${mins}:${secs} ${amOrPm}` 
+    }
+    function formatZeroes(time){
+        time = time.toString();
+        return time.length < 2 ? "0" + time : time;
+    }
 }
 
 
