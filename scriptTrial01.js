@@ -41,7 +41,7 @@ function addTodo(event) {
         meridian = 'PM';
     }
 
-    let hm = (hours<10 ? "0" + hours : hours)
+    let hm = (hours<10 ? "" + hours : hours)
     //-------------------------------------------------------------->
 
     // ADD ALARM---------------------------------------------------->
@@ -101,7 +101,7 @@ function addTodo(event) {
             newTodo.appendChild(alrmInput);
 //----------------------------------------------------------
             alrmInput2.classList.add("setTm2");
-            alrmInput2.innerText = alarmTime;
+            alrmInput2.innerText = alarmTM;
             todoAlarm.appendChild(alrmInput2);
             saveLocalTodos(todoInputDat)
             saveData();
@@ -294,15 +294,27 @@ function update(){
         //     }
         // }
             //Alarm Trigger TESTING --------------------------------------------------->
-        for(let i=0; i<todoAlarm.childElementCount; i++){
-            if(todoAlarm.children[i] == `${hours}:${mins}:${secs} ${amOrPm}`){
-                ring.load();
-                ring.play();
-                // console.log(`alarm ringing! + ${i}`)
-                document.querySelector(".testBtn").style.visibility= "visible";
-            // alert("ALARM IS RINGING")
+            var alarmList = document.querySelectorAll(".setTm2");
+            var alarms = alarmList.textContent;
+            for(let i = 0; i<alarmList.length; i++){
+                console.log(alarmList[i].innerText, typeof(alarmList));
+                console.log(`${hours}:${mins}:${secs} ${amOrPm}`)
+                if(alarmList[i].innerText === `${hours}:${mins}:${secs} ${amOrPm}`) {
+                    ring.load();
+                    ring.play();
+                    console.log(`alarm ringing! + ${i}`)
+                    document.querySelector(".testBtn").style.visibility= "visible";
+                }
             }
-        }
+        // for(let i=0; i<alarmList.length; i++){
+        //     if(alarmList[i].value == `${hours}:${mins}:${secs} ${amOrPm}`){
+        //         ring.load();
+        //         ring.play();
+        //         console.log(`alarm ringing! + ${i}`)
+        //         document.querySelector(".testBtn").style.visibility= "visible";
+            // alert("ALARM IS RINGING")
+        //     }
+        // }
         return`${hours}:${mins}:${secs} ${amOrPm}` 
     }
     function formatZeroes(time){
@@ -321,5 +333,3 @@ checkBx.onchange = function() {
         console.log(todoAlarm.childElementCount)   
     }
 }
-    
- 
