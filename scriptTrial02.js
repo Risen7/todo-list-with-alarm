@@ -98,7 +98,7 @@ function addTodo(event) {
 //Don't Display Alarm TIME input if no alarm or with alarm
         if(checkBx.checked == false) {
             alrmInput.classList.add("setTm");
-            alrmInput.innerText = alarmTime;
+            alrmInput.innerText = alarmTM;
             todoDiv.appendChild(alrmInput);
 //----------------------------------------------------------
             // alrmInput2.classList.add("setTm2");
@@ -312,7 +312,7 @@ function update(){
             for(let i = 0; i<alarmList.length; i++){
                 console.log(alarmList[i].innerText, typeof(alarmList));
                 console.log(`${hours}:${mins}:${secs} ${amOrPm}`)
-                if(alarmList[i].innerText === `${hours}:${mins} ${amOrPm}`) {
+                if(alarmList[i].innerText === `${hours}:${mins}:${secs} ${amOrPm}`) {
                     ring.load();
                     ring.play();
                     console.log(`alarm ringing! + ${i}`)
