@@ -70,7 +70,7 @@ function addTodo(event) {
         timeInput.classList.add("encTime");
         timeInput.innerText = dateStr;
         const alrmInput = document.createElement("div");
-        const alrmInput2 = document.createElement("div");
+        // const alrmInput2 = document.createElement("div");
         const todoDiv = document.createElement("div");
         todoDiv.classList.add("todoal");
         const newTodo = document.createElement("li");
@@ -99,7 +99,7 @@ function addTodo(event) {
         if(checkBx.checked == false) {
             alrmInput.classList.add("setTm");
             alrmInput.innerText = alarmTime;
-            todoList.appendChild(alrmInput);
+            todoDiv.appendChild(alrmInput);
 //----------------------------------------------------------
             // alrmInput2.classList.add("setTm2");
             // alrmInput2.innerText = alarmTM;
@@ -194,11 +194,11 @@ function saveAlarm() {
 
 function loadData() {
     todoList.innerHTML = localStorage.getItem("todoData");
-    loadAlarm();
+    // loadAlarm();
 }
 
 function loadAlarm() {
-    todoAlarm.innerHTML = localStorage.getItem("AlarmDat");
+    // todoAlarm.innerHTML = localStorage.getItem("AlarmDat");
     // alarmListArr = JSON.parse(localStorage.getItem("alarmData"));
     // console.log(alarmListArr);
 }
@@ -312,7 +312,7 @@ function update(){
             for(let i = 0; i<alarmList.length; i++){
                 console.log(alarmList[i].innerText, typeof(alarmList));
                 console.log(`${hours}:${mins}:${secs} ${amOrPm}`)
-                if(alarmList[i].innerText === `${hours}:${mins}:${secs} ${amOrPm}`) {
+                if(alarmList[i].innerText === `${hours}:${mins} ${amOrPm}`) {
                     ring.load();
                     ring.play();
                     console.log(`alarm ringing! + ${i}`)
