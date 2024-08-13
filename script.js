@@ -41,7 +41,8 @@ function addTodo(event) {
         meridian = 'PM';
     }
 
-    let hm = (hours<10 ? "" + hours : hours)
+    let hm = (hours<10 ? "0" + hours : hours)
+    let hourse = (hours<10 ? "0" + hours : hours)
     //-------------------------------------------------------------->
 
     // ADD ALARM---------------------------------------------------->
@@ -51,13 +52,13 @@ function addTodo(event) {
     let todoInputDate = `${todoInput.value} - ${dateStr}`;
     // saveAlarm();
     // alarmListArr.push(alarmTM);
-    //-------------------------------------------------------------->
+    //-------------------------------------------------------------->   
 // let alarmTime = `${setTm.value}`; - previous code
     if(todoInput.value === '' || setTm.value === ''){
         alert("YOU MUST WRITE TODO's and Alarm Time! Empty not Allowed!")
     }
     else {
-        let alarmTime = `${hours}:${minutes} ${meridian}`
+        let alarmTime = `${hourse}:${minutes} ${meridian}`
         let todoInputDate = `${todoInput.value} - ${dateStr}`;
 
 //Don't Save in Local Storage Alarm TIME input if no alarm or with alarm
@@ -69,7 +70,7 @@ function addTodo(event) {
         timeInput.classList.add("encTime");
         timeInput.innerText = dateStr;
         const alrmInput = document.createElement("div");
-        const alrmInput2 = document.createElement("div");
+        // const alrmInput2 = document.createElement("div");
         const todoDiv = document.createElement("div");
         todoDiv.classList.add("todoal");
         const newTodo = document.createElement("li");
@@ -98,11 +99,11 @@ function addTodo(event) {
         if(checkBx.checked == false) {
             alrmInput.classList.add("setTm");
             alrmInput.innerText = alarmTime;
-            newTodo.appendChild(alrmInput);
+            todoDiv.appendChild(alrmInput);
 //----------------------------------------------------------
-            alrmInput2.classList.add("setTm2");
-            alrmInput2.innerText = alarmTM;
-            todoAlarm.appendChild(alrmInput2);
+            // alrmInput2.classList.add("setTm2");
+            // alrmInput2.innerText = alarmTM;
+            // todoAlarm.appendChild(alrmInput2);
             saveLocalTodos(todoInputDat)
             saveData();
             saveAlarm();
@@ -186,18 +187,18 @@ function saveData() {
 }
 
 function saveAlarm() {
-    localStorage.setItem("AlarmDat", todoAlarm.innerHTML);
+    localStorage.setItem("AlarmDat", todoList.innerHTML);
     // alarmListArr.push(alarmTM);
     // localStorage.setItem("alarmData", JSON.stringify(alarmListArr));
 }
 
 function loadData() {
     todoList.innerHTML = localStorage.getItem("todoData");
-    loadAlarm();
+    // loadAlarm();
 }
 
 function loadAlarm() {
-    todoAlarm.innerHTML = localStorage.getItem("AlarmDat");
+    // todoAlarm.innerHTML = localStorage.getItem("AlarmDat");
     // alarmListArr = JSON.parse(localStorage.getItem("alarmData"));
     // console.log(alarmListArr);
 }
@@ -293,13 +294,25 @@ function update(){
         //     // alert("ALARM IS RINGING")
         //     }
         // }
-            //Alarm Trigger TESTING --------------------------------------------------->
-            var alarmList = document.querySelectorAll(".setTm2");
+            //Alarm Trigger TESTING ACTIVE --------------------------------------------------->
+            // var alarmList = document.querySelectorAll(".setTm2");
+            // var alarms = alarmList.textContent;
+            // for(let i = 0; i<alarmList.length; i++){
+            //     console.log(alarmList[i].innerText, typeof(alarmList));
+            //     console.log(`${hours}:${mins}:${secs} ${amOrPm}`)
+            //     if(alarmList[i].innerText === `${hours}:${mins}:${secs} ${amOrPm}`) {
+            //         ring.load();
+            //         ring.play();
+            //         console.log(`alarm ringing! + ${i}`)
+            //         document.querySelector(".testBtn").style.visibility= "visible";
+            //     }
+            // }
+            var alarmList = document.querySelectorAll(".setTm");
             var alarms = alarmList.textContent;
             for(let i = 0; i<alarmList.length; i++){
                 console.log(alarmList[i].innerText, typeof(alarmList));
                 console.log(`${hours}:${mins}:${secs} ${amOrPm}`)
-                if(alarmList[i].innerText === `${hours}:${mins}:${secs} ${amOrPm}`) {
+                if(alarmList[i].innerText === `${hours}:${mins} ${amOrPm}`) {
                     ring.load();
                     ring.play();
                     console.log(`alarm ringing! + ${i}`)
@@ -314,7 +327,7 @@ function update(){
         //         document.querySelector(".testBtn").style.visibility= "visible";
             // alert("ALARM IS RINGING")
         //     }
-        // }
+        // }    
         return`${hours}:${mins}:${secs} ${amOrPm}` 
     }
     function formatZeroes(time){
