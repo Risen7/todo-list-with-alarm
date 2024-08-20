@@ -105,6 +105,10 @@ form button:hover {
     border-radius: 0rem;
 }
 
+.todoal:hover {
+    transform: scale(1.25);
+}
+
 .todo-button i{
     letter-spacing: 3px;
     font-size: 1.6rem;
@@ -213,6 +217,11 @@ select {
     background: rgb(0, 0, 0, 0.3);
     /* border-radius: 25px; */
     border-radius: 0;
+    transition: all .7s;
+}
+
+#myLabel:hover {
+    transform: scale(1.4); 
 }
 
 .encTime {
@@ -247,7 +256,7 @@ select {
     border: 1px rgb(255, 255, 255) solid;
     /* border-radius: 20px 20px 20px 20px; */
     border-radius: 0;
-    padding: 5.5px 24px;
+    padding: 5.5px 22px;
     z-index: -1;
 }
 
@@ -350,6 +359,6 @@ select {
 @media (max-width: 600px) {
     .todo-container {
         justify-content: flex-start;
-        margin-left: 10%;
+        margin-left: 0%;
     }
 }
