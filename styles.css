@@ -5,7 +5,7 @@
 }
 
 body {
-    background: url(vishnu-mohanan-pfR18JNEMv8-unsplash.jpg);
+    background: url(darkBG.jpg);
     color: white;
     font-family: "Poppins", sans-serif;
     min-height: 100vh;
@@ -23,6 +23,10 @@ h1 {
     width: 100%;
     border-bottom: 1px solid rgb(255, 255, 255, 0.5);
     margin-bottom: 1rem;
+}
+
+.owner {
+    color: #00c2c7;
 }
 
 header,
@@ -44,7 +48,7 @@ form button {
     font-size: 1.3rem;
     border: none;
     background: white;
-    border-radius: 2rem;
+    border-radius: 0rem;
 }
 
 #aSet {
@@ -56,7 +60,7 @@ form button {
 }
 
 form button {
-    color: rgb(255, 200, 0);
+    color: #00c2c7;
     background: white;
     cursor: pointer;
     transition: all 0.3 ease;
@@ -65,7 +69,7 @@ form button {
 
 form button:hover {
     color: white;
-    background: rgb(255, 200, 0);
+    background: #00c2c7;
 }
 
 .fa-plus-circle {
@@ -96,7 +100,8 @@ form button:hover {
     justify-content: space-between;
     align-items: center;
     transition: 0.5s;
-    border-radius: 2rem;
+    /* border-radius: 2rem; */
+    border-radius: 0rem;
 }
 
 .todo-button i{
@@ -124,13 +129,13 @@ form button:hover {
 }
 
 .complete-btn {
-    background: rgb(255, 200, 18);
+    background: #00c2c7;
 }
 
 .trash-btn {
-    border-top-right-radius: 1.75rem;
-    border-bottom-right-radius: 1.75rem;
-    background: rgb(81, 192, 243)
+    /* border-top-right-radius: 1.75rem;
+    border-bottom-right-radius: 1.75rem; */
+    background: #e5232D;
 }
 
 .complete-btn:hover,
@@ -170,11 +175,12 @@ select {
     margin: 1rem;
     position:  relative;
     overflow: hidden;
-    border-radius: 50px;
+    /* border-radius: 50px; */
+    border-radius: 0;
 }
 
 select {
-    color: rgb(255, 200, 0);
+    color: #00c2c7;
     width: 10rem;
     height: 2.7rem;
     cursor: pointer;
@@ -186,7 +192,7 @@ select {
 .select::after {
     content: "\25BC";
     position: absolute;
-    background: rgb(255, 200, 0);
+    background: #00c2c7;
     top: -5px;
     right: 0;
     padding:  1rem;
@@ -196,24 +202,27 @@ select {
 
 .select:hover::after {
     background: gray;
-    color: rgb(255, 200, 0);
+    color: #00c2c7;
 }
 
 #myLabel, .timeInput {
     font-size: 1.5rem;
     padding: .5rem 1rem;
     border: 1px solid white;
-    border-radius: 25px;
+    /* border-radius: 25px; */
+    border-radius: 0;
 }
 
 .encTime {
     position: absolute;
     color: white;
     font-size: 0.9rem;
+    background: rgb(0, 0, 0, 0.5);
     left: -140px;
     top: 1px;   
     border: 1px rgb(255, 255, 255) solid;
-    border-radius: 20px 0px 0px 20px;
+    /* border-radius: 20px 0px 0px 20px; */
+    border-radius: 0;
     padding: 10px;
     padding-right: 50px;
     z-index: -1;
@@ -226,15 +235,17 @@ select {
 .setTm {
     position: absolute;
     /* background: rgb(255, 255, 255); */
-    width: 155px;
-    color: rgb(255, 200, 0);
+    width: 165px;
+    color: #00c2c7;
+    background: rgb(0, 0, 0, 0.5);
     font-size: 1.2rem;
     font-weight: 600;
-    right: -160px;
+    right: -170px;
     top: 1px;
     border: 1px rgb(255, 255, 255) solid;
-    border-radius: 20px 20px 20px 20px;
-    padding: 5.5px 20px;
+    /* border-radius: 20px 20px 20px 20px; */
+    border-radius: 0;
+    padding: 5.5px 22px;
     z-index: -1;
 }
 
@@ -260,8 +271,8 @@ select {
 }
 
 @keyframes alarm {
-    0% { background: rgb(255, 200, 0); color: white;}
-    100% { background: white; color: rgb(255, 200, 0);}
+    0% { background: #00c2c7; color: white;}
+    100% { background: white; color: #00c2c7;}
     
 }
 
@@ -282,7 +293,8 @@ select {
     background: rgb(255, 255, 255, 0.5);
     padding: 10px;
     min-width: 130px;
-    border-radius: 50px;
+    /* border-radius: 50px; */
+    border-radius: 0px;
     padding-inline: 15px;
 }
 
@@ -307,13 +319,13 @@ select {
         top: -30px;
         padding: 10px;  
         /* padding-right: 20px; */
-        border-radius: 20px 20px 0px 0px;
+        /* border-radius: 20px 20px 0px 0px; */
         width: 135px;
     }
 
     .setTm {
         position: absolute;
-        background: white;
+        /* background: white; */
         left: 160px;
         top: -30px;
     }    
